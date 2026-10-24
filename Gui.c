@@ -17,6 +17,9 @@ int main() {
         bool rejection = false;
         bool letter = false;
         bool start = false;
+        int frames = 0;
+        Image gif = LoadImageAnim(".gif", &frames);
+        Texture2D texture = LoadTextureFromImage(gif);
 
         while(!WindowShouldClose()) {
 
@@ -47,9 +50,6 @@ int main() {
                 BeginDrawing();
                 ClearBackground(RAYCREAM);
                 if(!start) {
-                        int frames = 0;
-                        Image gif = LoadImageAnim(".gif", &frames);
-                        Texture2D texture = LoadTextureFromImage(gif);
                         DrawTexture(texture, 510, 300, WHITE);
                         DrawText("there is something i want to tell you", 507, 250, 38, DARKPINK);
                         Color pink2 = hovering_button2 ? (Color){255, 145, 190, 255} : (Color){255, 182, 213, 255};
@@ -67,6 +67,8 @@ int main() {
                 }
                 EndDrawing();
         }
+        UnloadTexture(texture);
+        UnloadImage(gif);
         CloseWindow();
         return 0;
 }
